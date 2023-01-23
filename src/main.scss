@@ -1,0 +1,62 @@
+@import '~normalize.css';
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 10px;
+}
+
+button {
+	cursor: pointer;
+}
+
+.winners-table {
+	border-spacing: 0px;
+	&__thead {
+		background-color: #2f00ff;
+	}
+}
+.winners-table th, td {
+	padding: 5px 10px;
+}
+.button {
+	&__desabled {
+		opacity: 0.5;
+	}
+}
+
+.form {
+	margin: 20px 0;
+	display: flex;
+	gap: 5px;
+}
+
+.input {
+	&_id {
+		display: none;
+	}
+}
+
+.none {
+	display: none;
+}
+
+.car {
+	&__title {
+		margin-left: 10px;
+		color: greenyellow;
+	}
+	&__body {
+		display: flex;
+		align-items: center;
+		margin-top: 10px;
+	}
+	&__img {
+		width: 100px;
+		margin-left: 10px;
+	}
+}
