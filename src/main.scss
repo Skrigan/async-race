@@ -16,6 +16,7 @@ button {
 
 .winners-table {
 	border-spacing: 0px;
+	margin-bottom: 20px;
 	&__thead {
 		background-color: #2f00ff;
 	}
@@ -41,6 +42,10 @@ button {
 	}
 }
 
+.th-clicked {
+	cursor: pointer;
+}
+
 .none {
 	display: none;
 }
@@ -58,5 +63,9 @@ button {
 	&__img {
 		width: 100px;
 		margin-left: 10px;
+	}
+	&__flag {
+		position: absolute;
+    right: 10%;
 	}
 }

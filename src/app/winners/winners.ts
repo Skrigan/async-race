@@ -1,7 +1,7 @@
 import { winners, garage } from '../types';
 
 class Winners {
-    draw(winnersData: Array<winners>, garageData: Array<garage>) {
+    draw(winnersData: Array<winners>, garageData: Array<garage>): void {
         const fragment = document.createDocumentFragment();
         const winnerTemplate = document.querySelector('#winnerTemplate') as HTMLTemplateElement;
         winnersData.forEach((winner) => {
@@ -14,7 +14,6 @@ class Winners {
             winnerClone.querySelector('#winnerTime')!.textContent = `${winner.time}`;
             fragment.append(winnerClone);
         });
-        document.querySelector('#winners-count')!.textContent = `${winnersData.length}`;
         document.querySelector('.winners-table__tbody')!.innerHTML = '';
         document.querySelector('.winners-table__tbody')!.appendChild(fragment);
     }

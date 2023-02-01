@@ -1,81 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>async-race</title>
 </head>
-<body>
-	<header class="header" data-switch="on-garage">
-		<button data-switch="on-garage">TO GARAGE</button>
-		<button data-switch="on-winners">TO WINNERS</button>
-	</header>
-	<main class="main">
-		<div class="main__wrapper" id="garage">
-			<form class="form form_create" action="" method="post">
-				<input class="input input_text" type="text" name="name" required>
-				<input class="input input_color" type="color" name="color" required>
-				<button type="submit">CREATE</button>
-			</form>
-			<form class="form form_update" action="" method="post">
-				<input class="input input_id" type="number" name="id" required>
-				<input class="input input_text"type="text" name="name" required disabled>
-				<input class="input input_color"type="color" name="color" required disabled>
-				<button type="submit" disabled>UPDATE</button>
-			</form>
-			<h2>Garage (<span id="garage-fullness"></span>)</h2>
-			<h3>Page #<span id="garage-page-number">1</span></h3>
-			<div id="garageList"></div>
-		</div>
-		<div class="main__wrapper none" id="winners">
-			<h2>Winners (<span id="winners-count"></span>)</h2>
-			<h3>Page #<span id="winners-page-number">1</span></h3>
-			<!-- <div id="winnersList"></div> -->
-			<table class="winners-table">
-				<thead class="winners-table__thead">
-					<tr>
-						<th>Number</th>
-						<th>Car</th>
-						<th>Name</th>
-						<th>Wins</th>
-						<th>Best time (sec)</th>
-					</tr>
-				</thead>
-				<tbody class="winners-table__tbody"></tbody>
-			</table>
-		</div>
-		<template id="carTemplate">
-			<div class="car">
-				<div class="car__header">
-					<!-- <div class="car__buttons"> -->
-						<button class="button button_select">SELECT</button>
-						<button class="button button_remove">REMOVE</button>
-					<!-- </div> -->
-					<span class="car__title">title</span>
-				</div>
-				<div class="car__body">
-					<!-- <div class="car__controllers"> -->
-						<button class="button button_A">A</button>
-						<button class="button button_B">B</button>
-					<!-- </div> -->
-					<!-- <div class="car__model">🚗</div> -->
-					<!-- <img src="./assets/car-img.svg" alt="error car-img" class="car__img"> -->
-					<svg xmlns="http://www.w3.org/2000/svg" class="car__img" viewBox="0 0 256 125.87"><defs></defs><g id="Слой_2" data-name="Слой 2"><g id="Слой_1-2" data-name="Слой 1"><ellipse class="cls-1" cx="201.2" cy="96.03" rx="5.56" ry="5.49"/><ellipse class="cls-1" cx="56.22" cy="96.03" rx="5.56" ry="5.49"/><path class="cls-1" d="M214.7,37.77,192,34.35l-6.69-7.24A84.9,84.9,0,0,0,123.07,0H105.31A81.54,81.54,0,0,0,93.89.83l-.19,0a80.05,80.05,0,0,0-54.86,34C16.23,43,0,63.94,0,85.28a16.7,16.7,0,0,0,16.78,16.58H26.6a30.28,30.28,0,0,0,59.25,0h85.73a30.29,30.29,0,0,0,59.26,0h8.38A16.7,16.7,0,0,0,256,85.28C256,61.37,238.63,41.39,214.7,37.77ZM123.08,11.24A73.46,73.46,0,0,1,176.2,34H112.25L103,11.31c.78,0,1.56-.07,2.35-.07ZM91.25,12.69,100,34H54A68.72,68.72,0,0,1,91.25,12.69Zm-35,101.94A18.61,18.61,0,1,1,75.06,96,18.74,18.74,0,0,1,56.23,114.63Zm145,0A18.61,18.61,0,1,1,220.05,96,18.74,18.74,0,0,1,201.21,114.63Z"/></g></g></svg>
-				</div>
-				<!-- <div class="car__road"></div> -->
-				<hr class="car__road">
-			</div>
-		</template>
-		<template id="winnerTemplate">
-			<tr>
-				<td id="winnerId"></td>
-				<td><svg id="winnerImg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 125.87"><defs></defs><g id="Слой_2" data-name="Слой 2"><g id="Слой_1-2" data-name="Слой 1"><ellipse class="cls-1" cx="201.2" cy="96.03" rx="5.56" ry="5.49"/><ellipse class="cls-1" cx="56.22" cy="96.03" rx="5.56" ry="5.49"/><path class="cls-1" d="M214.7,37.77,192,34.35l-6.69-7.24A84.9,84.9,0,0,0,123.07,0H105.31A81.54,81.54,0,0,0,93.89.83l-.19,0a80.05,80.05,0,0,0-54.86,34C16.23,43,0,63.94,0,85.28a16.7,16.7,0,0,0,16.78,16.58H26.6a30.28,30.28,0,0,0,59.25,0h85.73a30.29,30.29,0,0,0,59.26,0h8.38A16.7,16.7,0,0,0,256,85.28C256,61.37,238.63,41.39,214.7,37.77ZM123.08,11.24A73.46,73.46,0,0,1,176.2,34H112.25L103,11.31c.78,0,1.56-.07,2.35-.07ZM91.25,12.69,100,34H54A68.72,68.72,0,0,1,91.25,12.69Zm-35,101.94A18.61,18.61,0,1,1,75.06,96,18.74,18.74,0,0,1,56.23,114.63Zm145,0A18.61,18.61,0,1,1,220.05,96,18.74,18.74,0,0,1,201.21,114.63Z"/></g></g></svg></td>
-				<td id="winnerName"></td>
-				<td id="winnerWins"></td>
-				<td id="winnerTime"></td>
-			</tr>
-		</template>
-	</main>
-</body>
+<body></body>
 </html>
